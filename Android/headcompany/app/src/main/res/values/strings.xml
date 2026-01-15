@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Head Company</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="signup">Registrarse</string>
+    <string name="forgetpassword">He olvidado mi contraseña</string>
+    <string name="mail">Correo</string>
+    <string name="insertMail">Ingresa tu correo</string>
+    <string name="password">Contraseña</string>
+    <string name="insertPassword">Ingresa tu contraseña</string>
+    <string name="repeatPassword">Repetir contraseña</string>
+    <string name="confirmPassword">Confirma tu contraseña</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="email">Correo electrónico</string>
+    <string name="myprofile">Mi perfil</string>
+
+    <string name="filters">Filtros</string>
+    <string name="accidents">⚠️ Accidentes</string>
+    <string name="construction">🏗️ Obras</string>
+    <string name="obstacles">🚧 Obstaculos</string>
+    <string name="traffic">🚦 Tráfico</string>
+    <string name="events">📅 Eventos</string>
+    <string name="meteorology">🌧️ Meteorologia</string>
+    <string name="others">🗂️ Otros</string>
+    <string name="cameras">📷 Cámaras</string>
+    <string name="cleanup">🧹 Limpiar todo</string>
+</resources>
