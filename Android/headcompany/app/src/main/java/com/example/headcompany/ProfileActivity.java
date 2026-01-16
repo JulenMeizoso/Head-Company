@@ -1,7 +1,10 @@
 package com.example.headcompany;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 
 import com.example.headcompany.api.ApiClient;
+import com.example.headcompany.model.UsersResponse;
 
 import java.util.List;
 
@@ -23,6 +27,10 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView mail = null;
 
+    ImageButton back = null;
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,21 +39,38 @@ public class ProfileActivity extends AppCompatActivity {
 
         mail = findViewById(R.id.correo);
 
-        ApiClient.getApiService().getUsers().enqueue(new Callback<List<Model.Usuario>>() {
+        back = findViewById(R.id.back);
+
+        back.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.jiggleDown(v);
+                    v.setPressed(true);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    this.finish();
+                    break;
+            }
+            return true;
+        });
+
+        ApiClient.getApiService().getUsers().enqueue(new Callback<UsersResponse>() {
             @Override
-            public void onResponse(Call<List<Model.Usuario>> call, Response<List<Model.Usuario>> response) {
+            public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Model.Usuario> users = response.body();
-
+                    List<Model.Usuario> users = response.body().getItems();
                     mail.setText(users.get(2).getMail());
-
                 }
             }
 
-            public void onFailure(Call<List<Model.Usuario>> call, Throwable t) {
-                mail.setText("no funciona");
+            @Override
+            public void onFailure(Call<UsersResponse> call, Throwable t) {
+                Log.e("API_ERROR", "Request failed", t);
+                mail.setText("Request failed: " + t.getMessage());
             }
         });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

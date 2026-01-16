@@ -11,6 +11,7 @@ googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 playServicesMaps = "18.1.0"
 cardview = "1.0.0"
 firebaseFirestore = "26.0.2"
+litertMetadata = "1.4.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -23,6 +24,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+litert-metadata = { group = "com.google.ai.edge.litert", name = "litert-metadata", version.ref = "litertMetadata" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

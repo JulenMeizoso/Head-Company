@@ -1,4 +1,4 @@
-package Model;
+package com.example.headcompany.model;
 
 public class Camera {
     private String address;

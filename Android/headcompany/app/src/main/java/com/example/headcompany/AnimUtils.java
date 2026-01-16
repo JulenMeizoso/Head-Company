@@ -178,6 +178,16 @@ public class AnimUtils {
         animatorSet.start();
     }
 
+    public static void blocknod(View v) {
+        ObjectAnimator nod = ObjectAnimator.ofFloat(v, "translationX", 0f, 25f, -25f, 25f, -25f, 25f ,0f);
+        nod.setDuration(400);
+        nod.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(nod);
+        animatorSet.start();
+    }
+
     public static void slideEaseInOut(View v) {
         if (v == null) return;
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ public class LoginActivity extends AppCompatActivity {
 
     MaterialButton login = null;
 
+    ImageButton back = null;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,22 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login = findViewById(R.id.login);
+
+        back = findViewById(R.id.back);
+
+        back.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.jiggleDown(v);
+                    v.setPressed(true);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    this.finish();
+                    break;
+            }
+            return true;
+        });
 
         login.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {

@@ -171,7 +171,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/obras"
@@ -189,7 +190,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/obstaculos"
@@ -207,7 +209,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/trafico"
@@ -225,7 +228,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/eventos"
@@ -243,7 +247,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/meteorologia"
@@ -261,7 +266,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/otros"
@@ -279,7 +285,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/camaras"
@@ -297,7 +304,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cleanup"
@@ -315,7 +323,8 @@
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282" />
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

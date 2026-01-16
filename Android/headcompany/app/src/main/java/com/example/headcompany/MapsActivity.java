@@ -5,17 +5,32 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.headcompany.api.ApiClient;
 import com.example.headcompany.databinding.ActivityMapsBinding;
+import com.example.headcompany.model.CameraResponse;
+import com.example.headcompany.model.Incidence;
+import com.example.headcompany.model.IncidenceResponse;
+import com.example.headcompany.model.UsersResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -307,38 +322,65 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         });
 
+
         binding.cleanup.setOnClickListener(v -> {
-            // SWITCHES
-            accidentesSwitch = false;
-            obrasSwitch = false;
-            obstaculosSwitch = false;
-            traficoSwitch = false;
-            eventosSwitch = false;
-            meteorologiaSwitch = false;
-            otrosSwitch = false;
-            camarasSwitch = false;
 
-            // MISC
-            binding.accidentes.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.accidentes.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.obras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.obras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.obstaculos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.obstaculos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.trafico.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.trafico.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.eventos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.eventos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.otros.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.otros.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.camaras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            binding.camaras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+            if (accidentesSwitch) {
+                binding.accidentes.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.accidentes.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.accidentes);
+                accidentesSwitch = false;
+            }
+
+            if (obrasSwitch) {
+                binding.obras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.obras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.obras);
+                obrasSwitch = false;
+            }
+
+            if (obstaculosSwitch) {
+                binding.obstaculos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.obstaculos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.obstaculos);
+                obstaculosSwitch = false;
+            }
+
+            if (traficoSwitch) {
+                binding.trafico.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.trafico.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.trafico);
+                traficoSwitch = false;
+            }
+
+            if (eventosSwitch) {
+                binding.eventos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.eventos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.eventos);
+                eventosSwitch = false;
+            }
+
+            if (meteorologiaSwitch) {
+                binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.meteorologia);
+                meteorologiaSwitch = false;
+            }
+
+            if (otrosSwitch) {
+                binding.otros.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.otros.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.otros);
+                otrosSwitch = false;
+            }
+
+            if (camarasSwitch) {
+                binding.camaras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.camaras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.camaras);
+                camarasSwitch = false;
+            }
         });
-
-
-
 
     }
 
@@ -356,10 +398,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        fetchIncidencesPage(1);
+    }
 
-        // Add a marker in Sydney and move the camera
-        LatLng spain = new LatLng(40, 4);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(spain));
+    private void fetchIncidencesPage(final int page) {
+        ApiClient.getApiService().getIncidences(page).enqueue(new Callback<IncidenceResponse>() {
+            @Override
+            public void onResponse(Call<IncidenceResponse> call, Response<IncidenceResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    IncidenceResponse incidenceResponse = response.body();
+                    List<Incidence> incidencias = incidenceResponse.getItems();
+
+                    for (Incidence incidence : incidencias) {
+                        LatLng position = new LatLng(incidence.getLatitude(), incidence.getLongitude());
+                        mMap.addMarker(new MarkerOptions()
+                                .position(position)
+                                .title(incidence.getDirection())
+                                .snippet("TIPO: " + incidence.getIncidenceType() + "\nFECHA: " + incidence.getStartDate()));
+                    }
+
+                    if (incidenceResponse.getCurrentPage() < incidenceResponse.getTotalPages()) {
+                        fetchIncidencesPage(page + 1);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IncidenceResponse> call, Throwable t) {
+                Log.e("API_ERROR", "Request failed on page " + page, t);
+            }
+        });
     }
 }
