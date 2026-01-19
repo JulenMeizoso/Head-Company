@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -386,6 +390,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
+
+
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -398,7 +406,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         fetchIncidencesPage(1);
+
     }
 
     private void fetchIncidencesPage(final int page) {
@@ -411,10 +421,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     for (Incidence incidence : incidencias) {
                         LatLng position = new LatLng(incidence.getLatitude(), incidence.getLongitude());
-                        mMap.addMarker(new MarkerOptions()
-                                .position(position)
-                                .title(incidence.getDirection())
-                                .snippet("TIPO: " + incidence.getIncidenceType() + "\nFECHA: " + incidence.getStartDate()));
+                        mMap.addMarker(new MarkerOptions().position(position));
                     }
 
                     if (incidenceResponse.getCurrentPage() < incidenceResponse.getTotalPages()) {

@@ -187,8 +187,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="57.5dp"
-                        android:fontFamily="@font/inter"
                         android:textAlignment="viewStart"
+                        android:fontFamily="@font/inter"
                         app:layout_constraintVertical_bias="0.75"
                         android:textColor="#828282"/>
 
