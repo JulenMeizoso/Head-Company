@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,22 +47,257 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // SWITCHES
     private boolean favSwitch;
-    private boolean accidentesSwitch;
-    private boolean obrasSwitch;
-    private boolean meteorologiaSwitch;
-    private boolean seguridadVialSwitch;
-    private boolean retencionSwitch;
-    private boolean vialidadInvernalSwitch;
-    private boolean puertosDeMontanaSwitch;
-    private boolean otrosSwitch;
-    private boolean camarasSwitch;
+    private boolean accidentesSwitch = true;
+    private boolean obrasSwitch = true;
+    private boolean meteorologiaSwitch = true;
+    private boolean seguridadVialSwitch = true;
+    private boolean retencionSwitch = true;
+    private boolean vialidadInvernalSwitch = true;
+    private boolean puertosDeMontanaSwitch = true;
+    private boolean otrosSwitch = true;
+    private boolean camarasSwitch = true;
+
     private Map<Marker, Incidence> markerIncidenceMap = new HashMap<>();
+
+    private void refreshMarkers() {
+        for (Marker marker : markerIncidenceMap.keySet()) {
+            Incidence inc = markerIncidenceMap.get(marker);
+            if (inc == null) continue;
+
+            String type = inc.getIncidenceType();
+
+            boolean visible = false;
+
+            switch (type) {
+                case "Accidente":
+                    visible = accidentesSwitch;
+                    break;
+                case "Obras":
+                    visible = obrasSwitch;
+                    break;
+                case "Meteorología":
+                    visible = meteorologiaSwitch;
+                    break;
+                case "Seguridad vial":
+                    visible = seguridadVialSwitch;
+                    break;
+                case "Retención":
+                    visible = retencionSwitch;
+                    break;
+                case "Vialidad invernal":
+                    visible = vialidadInvernalSwitch;
+                    break;
+                case "Puertos de montaña":
+                    visible = puertosDeMontanaSwitch;
+                    break;
+                case "Otros":
+                    visible = otrosSwitch;
+                    break;
+            }
+
+            marker.setVisible(visible);
+        }
+    }
+
+    // TESTING
+    private ArrayList<Incidence> createTestIncidences() {
+        ArrayList<Incidence> testList = new ArrayList<>();
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000001,
+                "",
+                "",
+                "Accidente",
+                0,
+                1,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000001,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000002,
+                "",
+                "",
+                "Obras",
+                0,
+                2,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000002,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000003,
+                "",
+                "",
+                "Meteorología",
+                0,
+                3,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000003,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000004,
+                "",
+                "",
+                "Seguridad vial",
+                0,
+                4,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000004,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000005,
+                "",
+                "",
+                "Retención",
+                0,
+                5,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000005,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000006,
+                "",
+                "",
+                "Vialidad invernal",
+                0,
+                6,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000006,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000007,
+                "",
+                "",
+                "Puertos de montaña",
+                0,
+                7,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000007,
+                ""
+        ));
+
+        testList.add(new Incidence(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                1000008,
+                "",
+                "",
+                "Otros",
+                0,
+                8,
+                0.0,
+                0.0,
+                "",
+                "",
+                1000008,
+                ""
+        ));
+
+        return testList;
+    }
+
+
+
+
+
+
+
+    // TESTING
+
 
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        refreshMarkers();
 
         favSwitch = false;
 
@@ -143,6 +380,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.accidentes.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.accidentes.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.obras.setOnTouchListener((v, event) -> {
@@ -167,6 +405,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.obras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.obras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.meteorologia.setOnTouchListener((v, event) -> {
@@ -191,6 +430,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.seguridadVial.setOnTouchListener((v, event) -> {
@@ -215,6 +455,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.seguridadVial.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.retencion.setOnTouchListener((v, event) -> {
@@ -239,6 +480,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.retencion.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.retencion.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.vialidadInvernal.setOnTouchListener((v, event) -> {
@@ -263,6 +505,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.puertosDeMontana.setOnTouchListener((v, event) -> {
@@ -287,6 +530,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.otros.setOnTouchListener((v, event) -> {
@@ -311,6 +555,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.otros.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.otros.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.camaras.setOnTouchListener((v, event) -> {
@@ -415,6 +660,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 AnimUtils.blocknod(binding.camaras);
                 camarasSwitch = false;
             }
+            refreshMarkers();
         });
 
         binding.bottomMenu.setVisibility(View.GONE);
@@ -432,6 +678,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             return false;
         });
+
+
+
 
 
     }
@@ -518,6 +767,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             return false; // false allows default behavior (camera moves to marker)
         });
+
+        // TESTING
+        ArrayList<Incidence> testIncidences = createTestIncidences();
+
+        for (Incidence inc : testIncidences) {
+            LatLng position = new LatLng(inc.getLatitude(), inc.getLongitude());
+            Marker marker = mMap.addMarker(
+                    new MarkerOptions()
+                            .position(position)
+                            .icon(getMarkerIconForType(inc.getIncidenceType()))
+            );
+
+            markerIncidenceMap.put(marker, inc);
+        }
+
+
+        refreshMarkers();
     }
 
 
