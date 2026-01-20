@@ -3,34 +3,33 @@ package com.example.headcompany;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.headcompany.api.ApiClient;
 import com.example.headcompany.databinding.ActivityMapsBinding;
-import com.example.headcompany.model.CameraResponse;
 import com.example.headcompany.model.Incidence;
 import com.example.headcompany.model.IncidenceResponse;
-import com.example.headcompany.model.UsersResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.button.MaterialButton;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -462,8 +461,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spain, 6f));
 
-
         mMap.setOnMarkerClickListener(marker -> {
+
             Incidence selectedIncidence = markerIncidenceMap.get(marker);
             if (selectedIncidence != null) {
                 binding.incidenceType.setText(selectedIncidence.getIncidenceType());
@@ -521,6 +520,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+
+    private BitmapDescriptor bitmapFromVector(int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(this, vectorResId);
+        if (vectorDrawable == null) return null;
+
+        // Set bounds
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+
+        // Create a bitmap to draw the vector onto
+        Bitmap bitmap = Bitmap.createBitmap(
+                vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(),
+                Bitmap.Config.ARGB_8888
+        );
+
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+
+
+    private BitmapDescriptor getMarkerIconForType(String type) {
+        int drawableId;
+        switch (type) {
+            case "Accidente": drawableId = R.drawable.accidente; break;
+            case "Obras": drawableId = R.drawable.obras; break;
+            case "Meteorología": drawableId = R.drawable.metereologia; break;
+            case "Seguridad vial": drawableId = R.drawable.seguridad_vial; break;
+            case "Retención": drawableId = R.drawable.retencion; break;
+            case "Vialidad invernal": drawableId = R.drawable.vialidad_invernal; break;
+            case "Puertos de montaña": drawableId = R.drawable.puertos_de_montana; break;
+            case "Otros": drawableId = R.drawable.fav_on; break;
+            default: drawableId = R.drawable.fav_on; break;
+        }
+
+        return bitmapFromVector(drawableId);
+    }
+
+
+
     private void fetchIncidencesPage(final int page) {
         ApiClient.getApiService().getIncidences(page).enqueue(new Callback<IncidenceResponse>() {
             @Override
@@ -531,8 +572,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     for (Incidence incidence : incidencias) {
                         LatLng position = new LatLng(incidence.getLatitude(), incidence.getLongitude());
-                        Marker marker = mMap.addMarker(new MarkerOptions().position(position));
-                        markerIncidenceMap.put(marker, incidence); // associate marker with data
+
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(position).icon(getMarkerIconForType(incidence.getIncidenceType())));
+                        markerIncidenceMap.put(marker, incidence);
                     }
 
 
