@@ -25,12 +25,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,12 +48,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean favSwitch;
     private boolean accidentesSwitch;
     private boolean obrasSwitch;
-    private boolean obstaculosSwitch;
-    private boolean traficoSwitch;
-    private boolean eventosSwitch;
     private boolean meteorologiaSwitch;
+    private boolean seguridadVialSwitch;
+    private boolean retencionSwitch;
+    private boolean vialidadInvernalSwitch;
+    private boolean puertosDeMontanaSwitch;
     private boolean otrosSwitch;
     private boolean camarasSwitch;
+    private Map<Marker, Incidence> markerIncidenceMap = new HashMap<>();
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -58,18 +63,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         favSwitch = false;
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         binding.fav.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
@@ -115,7 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 case MotionEvent.ACTION_CANCEL:
                     binding.drawerLayout.openDrawer(GravityCompat.START);
                     AnimUtils.jiggleUp(v);
-                    AnimUtils.slideEaseInOut(binding.menuLeft);
+                    AnimUtils.slideRight(binding.menuLeft);
                     break;
             }
             return false;
@@ -169,78 +170,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        binding.obstaculos.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    AnimUtils.pressDown(v);
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    AnimUtils.jiggleUp(v);
-                    break;
-            }
-            return false;
-        });
-
-        binding.obstaculos.setOnClickListener(v -> {
-            obstaculosSwitch = !obstaculosSwitch;
-            if (obstaculosSwitch) {
-                binding.obstaculos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#FF6900")));
-                binding.obstaculos.setTextColor(ColorStateList.valueOf(Color.parseColor("#FF6900")));
-            } else {
-                binding.obstaculos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                binding.obstaculos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            }
-        });
-
-        binding.trafico.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    AnimUtils.pressDown(v);
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    AnimUtils.jiggleUp(v);
-                    break;
-            }
-            return false;
-        });
-
-        binding.trafico.setOnClickListener(v -> {
-            traficoSwitch = !traficoSwitch;
-            if (traficoSwitch) {
-                binding.trafico.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#F0B100")));
-                binding.trafico.setTextColor(ColorStateList.valueOf(Color.parseColor("#F0B100")));
-            } else {
-                binding.trafico.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                binding.trafico.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            }
-        });
-
-        binding.eventos.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    AnimUtils.pressDown(v);
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    AnimUtils.jiggleUp(v);
-                    break;
-            }
-            return false;
-        });
-
-        binding.eventos.setOnClickListener(v -> {
-            eventosSwitch = !eventosSwitch;
-            if (eventosSwitch) {
-                binding.eventos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#F0B100")));
-                binding.eventos.setTextColor(ColorStateList.valueOf(Color.parseColor("#F0B100")));
-            } else {
-                binding.eventos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                binding.eventos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-            }
-        });
-
         binding.meteorologia.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -257,11 +186,107 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.meteorologia.setOnClickListener(v -> {
             meteorologiaSwitch = !meteorologiaSwitch;
             if (meteorologiaSwitch) {
-                binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#F0B100")));
-                binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#F0B100")));
+                binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#3C59EA")));
+                binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#3C59EA")));
             } else {
                 binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+            }
+        });
+
+        binding.seguridadVial.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.pressDown(v);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    AnimUtils.jiggleUp(v);
+                    break;
+            }
+            return false;
+        });
+
+        binding.seguridadVial.setOnClickListener(v -> {
+            seguridadVialSwitch = !seguridadVialSwitch;
+            if (seguridadVialSwitch) {
+                binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#FFB02E")));
+                binding.seguridadVial.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFB02E")));
+            } else {
+                binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.seguridadVial.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+            }
+        });
+
+        binding.retencion.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.pressDown(v);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    AnimUtils.jiggleUp(v);
+                    break;
+            }
+            return false;
+        });
+
+        binding.retencion.setOnClickListener(v -> {
+            retencionSwitch = !retencionSwitch;
+            if (retencionSwitch) {
+                binding.retencion.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#F8312F")));
+                binding.retencion.setTextColor(ColorStateList.valueOf(Color.parseColor("#F8312F")));
+            } else {
+                binding.retencion.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.retencion.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+            }
+        });
+
+        binding.vialidadInvernal.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.pressDown(v);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    AnimUtils.jiggleUp(v);
+                    break;
+            }
+            return false;
+        });
+
+        binding.vialidadInvernal.setOnClickListener(v -> {
+            vialidadInvernalSwitch = !vialidadInvernalSwitch;
+            if (vialidadInvernalSwitch) {
+                binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#01A1E6")));
+                binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(Color.parseColor("#01A1E6")));
+            } else {
+                binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+            }
+        });
+
+        binding.puertosDeMontana.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.pressDown(v);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    AnimUtils.jiggleUp(v);
+                    break;
+            }
+            return false;
+        });
+
+        binding.puertosDeMontana.setOnClickListener(v -> {
+            puertosDeMontanaSwitch = !puertosDeMontanaSwitch;
+            if (puertosDeMontanaSwitch) {
+                binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#8C5543")));
+                binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(Color.parseColor("#8C5543")));
+            } else {
+                binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
         });
 
@@ -343,32 +368,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 obrasSwitch = false;
             }
 
-            if (obstaculosSwitch) {
-                binding.obstaculos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                binding.obstaculos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                AnimUtils.blocknod(binding.obstaculos);
-                obstaculosSwitch = false;
-            }
-
-            if (traficoSwitch) {
-                binding.trafico.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                binding.trafico.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                AnimUtils.blocknod(binding.trafico);
-                traficoSwitch = false;
-            }
-
-            if (eventosSwitch) {
-                binding.eventos.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                binding.eventos.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
-                AnimUtils.blocknod(binding.eventos);
-                eventosSwitch = false;
-            }
-
             if (meteorologiaSwitch) {
                 binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 AnimUtils.blocknod(binding.meteorologia);
                 meteorologiaSwitch = false;
+            }
+
+            if (seguridadVialSwitch) {
+                binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.seguridadVial.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.seguridadVial);
+                seguridadVialSwitch = false;
+            }
+
+            if (retencionSwitch) {
+                binding.retencion.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.retencion.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.retencion);
+                retencionSwitch = false;
+            }
+
+            if (vialidadInvernalSwitch) {
+                binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.vialidadInvernal);
+                vialidadInvernalSwitch = false;
+            }
+
+            if (puertosDeMontanaSwitch) {
+                binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
+                AnimUtils.blocknod(binding.puertosDeMontana);
+                puertosDeMontanaSwitch = false;
             }
 
             if (otrosSwitch) {
@@ -385,6 +417,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 camarasSwitch = false;
             }
         });
+
+        binding.bottomMenu.setVisibility(View.GONE);
+
+        binding.close.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.jiggleDown(v);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    AnimUtils.jiggleUp(v);
+                    AnimUtils.slideDown(binding.bottomMenu);
+                    break;
+            }
+            return false;
+        });
+
 
     }
 
@@ -409,6 +458,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         fetchIncidencesPage(1);
 
+        LatLng spain = new LatLng(40.4168, -3.7038);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spain, 6f));
+
+
+        mMap.setOnMarkerClickListener(marker -> {
+            Incidence selectedIncidence = markerIncidenceMap.get(marker);
+            if (selectedIncidence != null) {
+                binding.incidenceType.setText(selectedIncidence.getIncidenceType());
+                binding.direction.setText(selectedIncidence.getDirection());
+                binding.province.setText(selectedIncidence.getProvince());
+                binding.startDate.setText(selectedIncidence.getStartDate());
+
+                switch (binding.incidenceType.getText().toString()) {
+                    case "Accidente":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.accidente));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.accidente));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40FB2C36"));
+                        break;
+                    case "Obras":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.obras));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.obras));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40FF6900"));
+                        break;
+                    case "Meteorología":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.meteorologia));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.meteorologia));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#403C59EA"));
+                        break;
+                    case "Seguridad vial":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.seguridad_vial));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.seguridad_vial));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40FFB02E"));
+                        break;
+                    case "Retención":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.retencion));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.retencion));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40F8312F"));
+                        break;
+                    case "Vialidad invernal":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.vialidad_invernal));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.vialidad_invernal));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#4001A1E6"));
+                        break;
+                    case "Puertos de montaña":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.puertos_de_montana));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.puertos_de_montana));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#408C5543"));
+                        break;
+                    case "Otros":
+                        binding.incidenceType.setTextColor(getResources().getColor(R.color.otros));
+                        binding.typeBorder.setStrokeColor(getResources().getColor(R.color.otros));
+                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40AD46FF"));
+                        break;
+                }
+
+                AnimUtils.slideUp(binding.bottomMenu);
+            }
+
+            return false; // false allows default behavior (camera moves to marker)
+        });
     }
 
     private void fetchIncidencesPage(final int page) {
@@ -421,8 +531,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     for (Incidence incidence : incidencias) {
                         LatLng position = new LatLng(incidence.getLatitude(), incidence.getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(position));
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(position));
+                        markerIncidenceMap.put(marker, incidence); // associate marker with data
                     }
+
 
                     if (incidenceResponse.getCurrentPage() < incidenceResponse.getTotalPages()) {
                         fetchIncidencesPage(page + 1);

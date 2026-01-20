@@ -188,14 +188,14 @@ public class AnimUtils {
         animatorSet.start();
     }
 
-    public static void slideEaseInOut(View v) {
+    public static void slideRight(View v) {
         if (v == null) return;
 
         v.setVisibility(View.VISIBLE);
 
         ObjectAnimator slideIn = ObjectAnimator.ofFloat(v, "translationX", -v.getWidth(), 0f);
         slideIn.setDuration(250);
-        slideIn.setInterpolator(new AccelerateDecelerateInterpolator()); // ease-in-out
+        slideIn.setInterpolator(new AccelerateDecelerateInterpolator());
 
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(v, "alpha", 0f, 1f);
         fadeIn.setDuration(400);
@@ -205,5 +205,81 @@ public class AnimUtils {
         animatorSet.playTogether(slideIn, fadeIn);
         animatorSet.start();
     }
+
+    public static void slideUp(View v) {
+        if (v == null) return;
+
+        v.setVisibility(View.VISIBLE);
+
+        ObjectAnimator slideUp = ObjectAnimator.ofFloat(v, "translationY", v.getHeight(), 0f);
+        slideUp.setDuration(150);
+        slideUp.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(v, "alpha", 0f, 1f);
+        fadeIn.setDuration(400);
+        fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator stretchX = ObjectAnimator.ofFloat(v, "scaleX", 0.6f);
+        ObjectAnimator stretchY = ObjectAnimator.ofFloat(v, "scaleY", 1.6f);
+        stretchX.setDuration(50);
+        stretchY.setDuration(50);
+        stretchX.setInterpolator(new AccelerateDecelerateInterpolator());
+        stretchY.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator normalX = ObjectAnimator.ofFloat(v, "scaleX", 1f);
+        ObjectAnimator normalY = ObjectAnimator.ofFloat(v, "scaleY", 1f);
+        normalX.setDuration(60);
+        normalY.setDuration(60);
+        normalX.setInterpolator(new AccelerateDecelerateInterpolator());
+        normalY.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator squashX2 = ObjectAnimator.ofFloat(v, "scaleX", 1.2f);
+        ObjectAnimator squashY2 = ObjectAnimator.ofFloat(v, "scaleY", 0.8f);
+        squashX2.setDuration(75);
+        squashY2.setDuration(75);
+        squashX2.setInterpolator(new AccelerateDecelerateInterpolator());
+        squashY2.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator normalX2 = ObjectAnimator.ofFloat(v, "scaleX", 1f);
+        ObjectAnimator normalY2 = ObjectAnimator.ofFloat(v, "scaleY", 1f);
+        normalX2.setDuration(75);
+        normalY2.setDuration(75);
+        normalX2.setInterpolator(new AccelerateDecelerateInterpolator());
+        normalY2.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(stretchX).with(stretchY).with(fadeIn).with(slideUp);
+        animatorSet.play(normalX).with(normalY).after(stretchX);
+        animatorSet.play(squashX2).with(squashY2).after(normalX);
+        animatorSet.play(normalX2).with(normalY2).after(squashX2);
+        animatorSet.playTogether(slideUp, fadeIn);
+        animatorSet.start();
+    }
+
+    public static void slideDown(View v) {
+        if (v == null) return;
+
+        v.setVisibility(View.VISIBLE);
+
+        ObjectAnimator slideDown = ObjectAnimator.ofFloat(v, "translationY", 0f, 1000f);
+        slideDown.setDuration(200);
+        slideDown.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(v, "alpha", 1f, 0f);
+        fadeOut.setDuration(400);
+        fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        ObjectAnimator squashX = ObjectAnimator.ofFloat(v, "scaleX", 1.6f);
+        ObjectAnimator squashY = ObjectAnimator.ofFloat(v, "scaleY", 0.6f);
+        squashX.setDuration(100);
+        squashY.setDuration(100);
+        squashX.setInterpolator(new AccelerateDecelerateInterpolator());
+        squashY.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(slideDown).with(fadeOut).with(squashX).with(squashY);
+        animatorSet.start();
+    }
+
 
 }

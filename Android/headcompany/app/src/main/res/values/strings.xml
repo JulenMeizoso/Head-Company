@@ -14,13 +14,19 @@
     <string name="myprofile">Mi perfil</string>
 
     <string name="filters">Filtros</string>
-    <string name="accidents">⚠️ Accidentes</string>
-    <string name="construction">🏗️ Obras</string>
-    <string name="obstacles">🚧 Obstaculos</string>
-    <string name="traffic">🚦 Tráfico</string>
-    <string name="events">📅 Eventos</string>
-    <string name="meteorology">🌧️ Meteorologia</string>
-    <string name="others">🗂️ Otros</string>
-    <string name="cameras">📷 Cámaras</string>
+    <string name="accidentes">⚠️ Accidentes</string>
+    <string name="obras">🏗️ Obras</string>
+    <string name="meteorologia">🌧️ Meteorologia</string>
+    <string name="seguridad_vial">⚠️ Seguridad vial</string>
+    <string name="retencion">🛑 Retención</string>
+    <string name="vialidad_invernal">❄️ Invernal</string>
+    <string name="puertos_de_montana">⛰️ Montaña</string>
+    <string name="otros">🗂️ Otros</string>
+    <string name="camaras">📷 Cámaras</string>
     <string name="cleanup">🧹 Limpiar todo</string>
+
+    <string name="direccion">Dirección</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="fecha">Fecha</string>
+
 </resources>

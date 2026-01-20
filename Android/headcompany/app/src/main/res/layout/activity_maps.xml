@@ -92,13 +92,18 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/bottom_menu"
-                android:layout_width="match_parent"
+                android:layout_width="325dp"
                 android:layout_height="250dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1"
                 app:cardCornerRadius="20dp"
-                android:visibility="gone">
+                android:layout_gravity="start"
+                android:orientation="vertical"
+                android:backgroundTint="#FFFFFF"
+                android:layout_marginBottom="62.5dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -109,16 +114,20 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageButton
+                        android:id="@+id/close"
+                        android:src="@drawable/close"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0"
-                        app:layout_constraintHorizontal_bias="1"/>
+                        app:layout_constraintVertical_bias="0.05"
+                        app:layout_constraintHorizontal_bias="0.975"
+                        android:backgroundTint="#00000000"/>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/type_border"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,19 +139,22 @@
                         android:textColor="#101828"
                         app:layout_constraintVertical_bias="0.075"
                         app:cardCornerRadius="5dp"
-                        app:cardElevation="0dp">
+                        app:cardElevation="0dp"
+                        android:backgroundTint="#00000000">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/type_background"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="#00000000">
 
                             <TextView
-                                android:id="@+id/type"
-                                android:text="Tipo"
+                                android:text="placeholder"
+                                android:id="@+id/incidenceType"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -155,10 +167,10 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="350dp"
+                        android:layout_width="275dp"
                         android:layout_height="125dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -188,10 +200,10 @@
                                 android:fontFamily="@font/inter"
                                 android:textColor="#101828"
                                 app:layout_constraintVertical_bias="0.1"
-                                android:text="Dirección" />
+                                android:text="@string/direccion" />
 
                             <TextView
-                                android:id="@+id/address"
+                                android:id="@+id/direction"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -201,8 +213,7 @@
                                 android:textAlignment="viewStart"
                                 android:fontFamily="@font/inter"
                                 android:textColor="#101828"
-                                app:layout_constraintVertical_bias="0.25"
-                                android:text="SANTANDER"/>
+                                app:layout_constraintVertical_bias="0.25"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -215,10 +226,10 @@
                                 android:fontFamily="@font/inter"
                                 android:textColor="#101828"
                                 app:layout_constraintVertical_bias="0.45"
-                                android:text="Ciudad"/>
+                                android:text="@string/ciudad"/>
 
                             <TextView
-                                android:id="@+id/town"
+                                android:id="@+id/province"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -228,8 +239,7 @@
                                 android:textAlignment="viewStart"
                                 android:fontFamily="@font/inter"
                                 android:textColor="#101828"
-                                app:layout_constraintVertical_bias="0.6"
-                                android:text="Bilbao"/>
+                                app:layout_constraintVertical_bias="0.6"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -242,10 +252,10 @@
                                 android:fontFamily="@font/inter"
                                 android:textColor="#101828"
                                 app:layout_constraintVertical_bias="0.8"
-                                android:text="Fecha"/>
+                                android:text="@string/fecha"/>
 
                             <TextView
-                                android:id="@+id/date"
+                                android:id="@+id/startDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -255,8 +265,7 @@
                                 android:textAlignment="viewStart"
                                 android:fontFamily="@font/inter"
                                 android:textColor="#101828"
-                                app:layout_constraintVertical_bias="0.95"
-                                android:text="19/01/2026"/>
+                                app:layout_constraintVertical_bias="0.95"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,7 +273,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:text="Añadir a favoritos"
-                        android:layout_width="350dp"
+                        android:layout_width="275dp"
                         android:layout_height="50dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -353,7 +362,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/accidents"
+                    android:text="@string/accidentes"
                     app:strokeWidth="3dp"
                     app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.175"
@@ -372,67 +381,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/construction"
+                    android:text="@string/obras"
                     app:strokeWidth="3dp"
                     app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.25"
-                    android:backgroundTint="#D9D9D9"
-                    app:cornerRadius="7.5dp"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/inter"
-                    android:textColor="#828282"
-                    app:rippleColor="@android:color/transparent"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/obstaculos"
-                    android:layout_width="200dp"
-                    android:layout_height="47.5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/obstacles"
-                    app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
-                    app:layout_constraintVertical_bias="0.325"
-                    android:backgroundTint="#D9D9D9"
-                    app:cornerRadius="7.5dp"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/inter"
-                    android:textColor="#828282"
-                    app:rippleColor="@android:color/transparent"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/trafico"
-                    android:layout_width="200dp"
-                    android:layout_height="47.5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/traffic"
-                    app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
-                    app:layout_constraintVertical_bias="0.4"
-                    android:backgroundTint="#D9D9D9"
-                    app:cornerRadius="7.5dp"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/inter"
-                    android:textColor="#828282"
-                    app:rippleColor="@android:color/transparent"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/eventos"
-                    android:layout_width="200dp"
-                    android:layout_height="47.5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/events"
-                    app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
-                    app:layout_constraintVertical_bias="0.475"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
@@ -448,10 +400,86 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/meteorology"
+                    android:text="@string/meteorologia"
+                    app:strokeWidth="3dp"
+                    app:strokeColor="#828282"
+                    app:layout_constraintVertical_bias="0.325"
+                    android:backgroundTint="#D9D9D9"
+                    app:cornerRadius="7.5dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter"
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/seguridad_vial"
+                    android:layout_width="200dp"
+                    android:layout_height="47.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/seguridad_vial"
+                    app:strokeWidth="3dp"
+                    app:strokeColor="#828282"
+                    app:layout_constraintVertical_bias="0.4"
+                    android:backgroundTint="#D9D9D9"
+                    app:cornerRadius="7.5dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter"
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/retencion"
+                    android:layout_width="200dp"
+                    android:layout_height="47.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/retencion"
+                    app:strokeWidth="3dp"
+                    app:strokeColor="#828282"
+                    app:layout_constraintVertical_bias="0.475"
+                    android:backgroundTint="#D9D9D9"
+                    app:cornerRadius="7.5dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter"
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/vialidad_invernal"
+                    android:layout_width="200dp"
+                    android:layout_height="47.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/vialidad_invernal"
                     app:strokeWidth="3dp"
                     app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.55"
+                    android:backgroundTint="#D9D9D9"
+                    app:cornerRadius="7.5dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter"
+                    android:textColor="#828282"
+                    app:rippleColor="@android:color/transparent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/puertos_de_montana"
+                    android:layout_width="200dp"
+                    android:layout_height="47.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/puertos_de_montana"
+                    app:strokeWidth="3dp"
+                    app:strokeColor="#828282"
+                    app:layout_constraintVertical_bias="0.625"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
@@ -467,10 +495,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/others"
+                    android:text="@string/otros"
                     app:strokeWidth="3dp"
                     app:strokeColor="#828282"
-                    app:layout_constraintVertical_bias="0.625"
+                    app:layout_constraintVertical_bias="0.7"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
@@ -486,10 +514,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/cameras"
+                    android:text="@string/camaras"
                     app:strokeWidth="3dp"
                     app:strokeColor="#828282"
-                    app:layout_constraintVertical_bias="0.7"
+                    app:layout_constraintVertical_bias="0.775"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
