@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -19,12 +20,25 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton login = null;
     private MaterialButton signup = null;
 
+    private void hideSystemBars() {
+        WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(
+                getWindow(), getWindow().getDecorView()
+        );
+
+        controller.hide(WindowInsetsCompat.Type.systemBars());
+        controller.setSystemBarsBehavior(
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        );
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        hideSystemBars();
 
         login = findViewById(R.id.login);
         signup = findViewById(R.id.signup);

@@ -11,12 +11,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowInsetsController;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.headcompany.api.ApiClient;
+import com.example.headcompany.database.DataManager;
 import com.example.headcompany.databinding.ActivityMapsBinding;
 import com.example.headcompany.model.Incidence;
 import com.example.headcompany.model.IncidenceResponse;
@@ -29,6 +33,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +63,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Map<Marker, Incidence> markerIncidenceMap = new HashMap<>();
 
+    private Incidence selectedIncidence;
+
+    DataManager dataManager = new DataManager(this);
+
     private void refreshMarkers() {
         for (Marker marker : markerIncidenceMap.keySet()) {
             Incidence inc = markerIncidenceMap.get(marker);
@@ -65,38 +74,73 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             String type = inc.getIncidenceType();
 
-            boolean visible = false;
-
+            // Classic switch
+            boolean typeVisible = false;
             switch (type) {
                 case "Accidente":
-                    visible = accidentesSwitch;
+                    typeVisible = accidentesSwitch;
                     break;
                 case "Obras":
-                    visible = obrasSwitch;
+                    typeVisible = obrasSwitch;
                     break;
                 case "Meteorología":
-                    visible = meteorologiaSwitch;
+                    typeVisible = meteorologiaSwitch;
                     break;
                 case "Seguridad vial":
-                    visible = seguridadVialSwitch;
+                    typeVisible = seguridadVialSwitch;
                     break;
                 case "Retención":
-                    visible = retencionSwitch;
+                    typeVisible = retencionSwitch;
                     break;
                 case "Vialidad invernal":
-                    visible = vialidadInvernalSwitch;
+                    typeVisible = vialidadInvernalSwitch;
                     break;
                 case "Puertos de montaña":
-                    visible = puertosDeMontanaSwitch;
+                    typeVisible = puertosDeMontanaSwitch;
                     break;
                 case "Otros":
-                    visible = otrosSwitch;
+                    typeVisible = otrosSwitch;
                     break;
             }
 
-            marker.setVisible(visible);
+            // Apply favorite filter
+            boolean finalVisible;
+            if (favSwitch) {
+                finalVisible = typeVisible && dataManager.isFavorite(inc.getIncidenceId());
+            } else {
+                finalVisible = typeVisible;
+            }
+
+            marker.setVisible(finalVisible);
         }
     }
+
+    private void updateFavButtonText() {
+        if (selectedIncidence == null) return;
+
+        boolean isFav = dataManager.isFavorite(selectedIncidence.getIncidenceId());
+
+        if (isFav) {
+            binding.favButton.setText(R.string.favs_remove);
+        } else {
+            binding.favButton.setText(R.string.favs_add);
+        }
+    }
+
+
+    private void hideSystemBars() {
+        WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(
+                getWindow(), getWindow().getDecorView()
+        );
+
+        controller.hide(WindowInsetsCompat.Type.systemBars());
+        controller.setSystemBarsBehavior(
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        );
+    }
+
+
+
 
     // TESTING
     private ArrayList<Incidence> createTestIncidences() {
@@ -296,12 +340,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        refreshMarkers();
-
         favSwitch = false;
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        hideSystemBars();
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -312,20 +358,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 case MotionEvent.ACTION_DOWN:
                     AnimUtils.jiggleDown(v);
                     break;
+
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     AnimUtils.jiggleUp(v);
+
+                    favSwitch = !favSwitch;
+
+                    binding.fav.setImageResource(
+                            favSwitch ? R.drawable.fav_on : R.drawable.fav_off
+                    );
+
+                    refreshMarkers();
                     break;
             }
             return false;
         });
 
-        binding.fav.setOnClickListener(v -> {
-            favSwitch = !favSwitch;
-            binding.fav.setImageResource(
-                    favSwitch ? R.drawable.fav_on : R.drawable.fav_off
-            );
-        });
 
         binding.profile.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
@@ -594,18 +643,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         });
 
+
+
         binding.favButton.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     AnimUtils.pressDown(v);
                     break;
+
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     AnimUtils.jiggleUp(v);
+
+                    if (selectedIncidence == null) break;
+
+                    boolean isFav = dataManager.isFavorite(selectedIncidence.getIncidenceId());
+
+                    if (isFav) {
+                        dataManager.removeFavorite(selectedIncidence.getIncidenceId());
+                    } else {
+                        dataManager.addFavorite(selectedIncidence);
+                    }
+
+                    updateFavButtonText();   // 👈 TEXT ONLY
+                    refreshMarkers();        // 👈 needed if fav filter is active
                     break;
             }
             return false;
         });
+
+
+
+
 
 
         binding.cleanup.setOnClickListener(v -> {
@@ -724,7 +793,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnMarkerClickListener(marker -> {
 
-            Incidence selectedIncidence = markerIncidenceMap.get(marker);
+            selectedIncidence = markerIncidenceMap.get(marker);
+
             if (selectedIncidence != null) {
                 binding.incidenceType.setText(selectedIncidence.getIncidenceType());
                 binding.direction.setText(selectedIncidence.getDirection());
@@ -774,8 +844,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         break;
                 }
 
+                updateFavButtonText();
+
                 AnimUtils.slideUp(binding.bottomMenu);
             }
+
+
 
             return false; // false allows default behavior (camera moves to marker)
         });
