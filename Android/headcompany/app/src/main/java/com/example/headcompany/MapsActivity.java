@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -374,8 +373,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.accidentes.setOnClickListener(v -> {
             accidentesSwitch = !accidentesSwitch;
             if (accidentesSwitch) {
-                binding.accidentes.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#FB2C36")));
-                binding.accidentes.setTextColor(ColorStateList.valueOf(Color.parseColor("#FB2C36")));
+                binding.accidentes.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.accidente)));
+                binding.accidentes.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.accidente)));
             } else {
                 binding.accidentes.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.accidentes.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -399,8 +398,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.obras.setOnClickListener(v -> {
             obrasSwitch = !obrasSwitch;
             if (obrasSwitch) {
-                binding.obras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#FF6900")));
-                binding.obras.setTextColor(ColorStateList.valueOf(Color.parseColor("#FF6900")));
+                binding.obras.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.obras)));
+                binding.obras.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.obras)));
             } else {
                 binding.obras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.obras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -424,8 +423,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.meteorologia.setOnClickListener(v -> {
             meteorologiaSwitch = !meteorologiaSwitch;
             if (meteorologiaSwitch) {
-                binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#3C59EA")));
-                binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#3C59EA")));
+                binding.meteorologia.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.meteorologia)));
+                binding.meteorologia.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meteorologia)));
             } else {
                 binding.meteorologia.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.meteorologia.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -449,8 +448,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.seguridadVial.setOnClickListener(v -> {
             seguridadVialSwitch = !seguridadVialSwitch;
             if (seguridadVialSwitch) {
-                binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#FFB02E")));
-                binding.seguridadVial.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFB02E")));
+                binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.seguridad_vial)));
+                binding.seguridadVial.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.seguridad_vial)));
             } else {
                 binding.seguridadVial.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.seguridadVial.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -474,8 +473,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.retencion.setOnClickListener(v -> {
             retencionSwitch = !retencionSwitch;
             if (retencionSwitch) {
-                binding.retencion.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#F8312F")));
-                binding.retencion.setTextColor(ColorStateList.valueOf(Color.parseColor("#F8312F")));
+                binding.retencion.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.retencion)));
+                binding.retencion.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.retencion)));
             } else {
                 binding.retencion.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.retencion.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -499,8 +498,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.vialidadInvernal.setOnClickListener(v -> {
             vialidadInvernalSwitch = !vialidadInvernalSwitch;
             if (vialidadInvernalSwitch) {
-                binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#01A1E6")));
-                binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(Color.parseColor("#01A1E6")));
+                binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.vialidad_invernal)));
+                binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.vialidad_invernal)));
             } else {
                 binding.vialidadInvernal.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.vialidadInvernal.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -524,8 +523,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.puertosDeMontana.setOnClickListener(v -> {
             puertosDeMontanaSwitch = !puertosDeMontanaSwitch;
             if (puertosDeMontanaSwitch) {
-                binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#8C5543")));
-                binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(Color.parseColor("#8C5543")));
+                binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.puertos_de_montana)));
+                binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.puertos_de_montana)));
             } else {
                 binding.puertosDeMontana.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.puertosDeMontana.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -549,8 +548,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.otros.setOnClickListener(v -> {
             otrosSwitch = !otrosSwitch;
             if (otrosSwitch) {
-                binding.otros.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#AD46FF")));
-                binding.otros.setTextColor(ColorStateList.valueOf(Color.parseColor("#AD46FF")));
+                binding.otros.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.otros)));
+                binding.otros.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.otros)));
             } else {
                 binding.otros.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.otros.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
@@ -590,6 +589,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     AnimUtils.bruhsoff(v);
+                    break;
+            }
+            return false;
+        });
+
+        binding.favButton.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    AnimUtils.pressDown(v);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    AnimUtils.jiggleUp(v);
                     break;
             }
             return false;
@@ -723,42 +735,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     case "Accidente":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.accidente));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.accidente));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40FB2C36"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.accidente_bg));
                         break;
                     case "Obras":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.obras));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.obras));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40FF6900"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.obras_bg));
                         break;
                     case "Meteorología":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.meteorologia));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.meteorologia));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#403C59EA"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.meteorologia_bg));
                         break;
                     case "Seguridad vial":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.seguridad_vial));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.seguridad_vial));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40FFB02E"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.seguridad_vial_bg));
                         break;
                     case "Retención":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.retencion));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.retencion));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40F8312F"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.retencion_bg));
                         break;
                     case "Vialidad invernal":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.vialidad_invernal));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.vialidad_invernal));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#4001A1E6"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.vialidad_invernal_bg));
                         break;
                     case "Puertos de montaña":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.puertos_de_montana));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.puertos_de_montana));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#408C5543"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.puertos_de_montana_bg));
                         break;
                     case "Otros":
                         binding.incidenceType.setTextColor(getResources().getColor(R.color.otros));
                         binding.typeBorder.setStrokeColor(getResources().getColor(R.color.otros));
-                        binding.typeBackground.setBackgroundColor(Color.parseColor("#40AD46FF"));
+                        binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.otros_bg));
                         break;
                 }
 
@@ -812,14 +824,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private BitmapDescriptor getMarkerIconForType(String type) {
         int drawableId;
         switch (type) {
-            case "Accidente": drawableId = R.drawable.accidente; break;
-            case "Obras": drawableId = R.drawable.obras; break;
-            case "Meteorología": drawableId = R.drawable.metereologia; break;
-            case "Seguridad vial": drawableId = R.drawable.seguridad_vial; break;
-            case "Retención": drawableId = R.drawable.retencion; break;
-            case "Vialidad invernal": drawableId = R.drawable.vialidad_invernal; break;
-            case "Puertos de montaña": drawableId = R.drawable.puertos_de_montana; break;
-            case "Otros": drawableId = R.drawable.fav_on; break;
+            case "Accidente": drawableId = R.drawable.accidente_marker; break;
+            case "Obras": drawableId = R.drawable.obras_marker; break;
+            case "Meteorología": drawableId = R.drawable.metereologia_marker; break;
+            case "Seguridad vial": drawableId = R.drawable.seguridad_vial_marker; break;
+            case "Retención": drawableId = R.drawable.retencion_marker; break;
+            case "Vialidad invernal": drawableId = R.drawable.vialidad_invernal_marker; break;
+            case "Puertos de montaña": drawableId = R.drawable.puertos_de_montana_marker; break;
+            case "Otros": drawableId = R.drawable.otros_marker; break;
             default: drawableId = R.drawable.fav_on; break;
         }
 

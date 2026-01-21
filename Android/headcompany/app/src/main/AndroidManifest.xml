@@ -17,9 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Headcompany">
         <activity
-            android:name=".MarkerInfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <!--

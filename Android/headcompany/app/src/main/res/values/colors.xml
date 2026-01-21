@@ -2,12 +2,29 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="accidente">#FB2C36</color>
+    <color name="accidente_bg">#40FB2C36</color>
+
     <color name="obras">#FF6900</color>
+    <color name="obras_bg">#40FF6900</color>
+
     <color name="meteorologia">#3C59EA</color>
+    <color name="meteorologia_bg">#403C59EA</color>
+
     <color name="seguridad_vial">#FFB02E</color>
-    <color name="retencion">#F8312F</color>
+    <color name="seguridad_vial_bg">#40FFB02E</color>
+
+    <color name="retencion">#14BC0C</color>
+    <color name="retencion_bg">#4014BC0C</color>
+
     <color name="vialidad_invernal">#01A1E6</color>
+    <color name="vialidad_invernal_bg">#4001A1E6</color>
+
     <color name="puertos_de_montana">#8C5543</color>
+    <color name="puertos_de_montana_bg">#408C5543</color>
+
     <color name="otros">#AD46FF</color>
+    <color name="otros_bg">#40AD46FF</color>
+
 </resources>

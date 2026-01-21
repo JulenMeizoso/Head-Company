@@ -272,7 +272,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <com.google.android.material.button.MaterialButton
-                        android:text="Añadir a favoritos"
+                        android:id="@+id/fav_button"
+                        android:text="@string/favs_add"
                         android:layout_width="275dp"
                         android:layout_height="50dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -283,7 +284,8 @@
                         app:cornerRadius="7.5dp"
                         android:fontFamily="@font/inter"
                         android:textColor="#101828"
-                        android:backgroundTint="#D9D9D9"/>
+                        android:backgroundTint="#D9D9D9"
+                        app:rippleColor="@android:color/transparent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -363,14 +365,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/accidentes"
+                    android:drawableEnd="@drawable/accidente"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.175"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/accidente"
+                    app:strokeColor="@color/accidente"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -382,14 +385,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/obras"
+                    android:drawableEnd="@drawable/obras"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.25"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/obras"
+                    app:strokeColor="@color/obras"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -401,14 +405,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/meteorologia"
+                    android:drawableEnd="@drawable/metereologia"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.325"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/meteorologia"
+                    app:strokeColor="@color/meteorologia"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -420,14 +425,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/seguridad_vial"
+                    android:drawableEnd="@drawable/seguridad_vial"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.4"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/seguridad_vial"
+                    app:strokeColor="@color/seguridad_vial"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -439,14 +445,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/retencion"
+                    android:drawableEnd="@drawable/retencion"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.475"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/retencion"
+                    app:strokeColor="@color/retencion"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -458,14 +465,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/vialidad_invernal"
+                    android:drawableEnd="@drawable/vialidad_invernal"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.55"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/vialidad_invernal"
+                    app:strokeColor="@color/vialidad_invernal"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -477,14 +485,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/puertos_de_montana"
+                    android:drawableEnd="@drawable/puertos_de_montana"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.625"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/puertos_de_montana"
+                    app:strokeColor="@color/puertos_de_montana"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -496,14 +505,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/otros"
+                    android:drawableEnd="@drawable/otros"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
                     app:layout_constraintVertical_bias="0.7"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/otros"
+                    app:strokeColor="@color/otros"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton
