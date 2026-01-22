@@ -7,11 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsetsController;
+
 
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -22,6 +24,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.headcompany.api.ApiClient;
 import com.example.headcompany.database.DataManager;
 import com.example.headcompany.databinding.ActivityMapsBinding;
+import com.example.headcompany.model.Camera;
+import com.example.headcompany.model.CameraResponse;
 import com.example.headcompany.model.Incidence;
 import com.example.headcompany.model.IncidenceResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,6 +37,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.button.MaterialButton;
+import com.bumptech.glide.Glide;
 
 
 import java.util.HashMap;
@@ -62,19 +68,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean camarasSwitch = true;
 
     private Map<Marker, Incidence> markerIncidenceMap = new HashMap<>();
+    private Map<Marker, Camera> markerCameraMap = new HashMap<>();
 
     private Incidence selectedIncidence;
+    private Camera selectedCamera;
 
     DataManager dataManager = new DataManager(this);
 
     private void refreshMarkers() {
         for (Marker marker : markerIncidenceMap.keySet()) {
+
             Incidence inc = markerIncidenceMap.get(marker);
+
             if (inc == null) continue;
 
             String type = inc.getIncidenceType();
 
-            // Classic switch
             boolean typeVisible = false;
             switch (type) {
                 case "Accidente":
@@ -112,6 +121,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             marker.setVisible(finalVisible);
+
+            if (finalVisible) {
+                boolean isFav = dataManager.isFavorite(inc.getIncidenceId());
+                marker.setIcon(getMarkerIconForType(inc.getIncidenceType(), isFav));
+            }
+
+        }
+
+        for (Marker marker : markerCameraMap.keySet()) {
+            marker.setVisible(camarasSwitch);
         }
     }
 
@@ -122,8 +141,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (isFav) {
             binding.favButton.setText(R.string.favs_remove);
+            binding.favButton.setIcon(ContextCompat.getDrawable(this, R.drawable.fav_on));
         } else {
             binding.favButton.setText(R.string.favs_add);
+            binding.favButton.setIcon(ContextCompat.getDrawable(this, R.drawable.fav_off));
         }
     }
 
@@ -325,13 +346,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return testList;
     }
 
+    Camera testCamera = new Camera(
+            "",
+            1000009,
+            "",
+            "",
+            0,
+            9,
+            "",
+            1000009,
+            "https://i.redd.it/my-friend-keeps-sending-these-hamsters-as-reaction-images-v0-p95a726z385f1.jpg?width=1290&format=pjpg&auto=webp&s=d7f5203e1f9730fbe3f19a249286cf4c4da0d599"
+    );
 
-
-
-
-
-
-    // TESTING
 
 
 
@@ -622,12 +648,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.camaras.setOnClickListener(v -> {
             camarasSwitch = !camarasSwitch;
             if (camarasSwitch) {
-                binding.camaras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#2B7FFF")));
-                binding.camaras.setTextColor(ColorStateList.valueOf(Color.parseColor("#2B7FFF")));
+                binding.camaras.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.camaras)));
+                binding.camaras.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.camaras)));
             } else {
                 binding.camaras.setStrokeColor(ColorStateList.valueOf(Color.parseColor("#828282")));
                 binding.camaras.setTextColor(ColorStateList.valueOf(Color.parseColor("#828282")));
             }
+            refreshMarkers();
         });
 
         binding.cleanup.setOnTouchListener((v, event) -> {
@@ -665,8 +692,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         dataManager.addFavorite(selectedIncidence);
                     }
 
-                    updateFavButtonText();   // 👈 TEXT ONLY
-                    refreshMarkers();        // 👈 needed if fav filter is active
+                    updateFavButtonText();
+                    refreshMarkers();
                     break;
             }
             return false;
@@ -787,6 +814,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         fetchIncidencesPage(1);
 
+        fetchCameraPage(1);
+
         LatLng spain = new LatLng(40.4168, -3.7038);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spain, 6f));
@@ -794,12 +823,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(marker -> {
 
             selectedIncidence = markerIncidenceMap.get(marker);
+            selectedCamera = markerCameraMap.get(marker);
 
             if (selectedIncidence != null) {
                 binding.incidenceType.setText(selectedIncidence.getIncidenceType());
+                binding.direccion.setText(R.string.direccion);
                 binding.direction.setText(selectedIncidence.getDirection());
+                binding.ciudad.setText(R.string.ciudad);
                 binding.province.setText(selectedIncidence.getProvince());
+                binding.fecha.setText(R.string.fecha);
                 binding.startDate.setText(selectedIncidence.getStartDate());
+                binding.infoCard.setBackgroundColor(Color.parseColor("#FFD9D9D9"));
+                binding.favButton.setVisibility(View.VISIBLE);
+                binding.direccion.setText(R.string.direccion);
+                binding.cardImage.setImageURI(Uri.parse("https://freepngimg.com/thumb/winter_snow/6-2-clear-snow-png.png"));
 
                 switch (binding.incidenceType.getText().toString()) {
                     case "Accidente":
@@ -848,10 +885,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 AnimUtils.slideUp(binding.bottomMenu);
             }
+            else if (selectedCamera != null) {
+                updateFavButtonText();
+                binding.incidenceType.setText(R.string.camara);
+                binding.direccion.setText(R.string.carretera);
+                binding.direction.setText(selectedCamera.getRoad());
+                binding.ciudad.setText("");
+                binding.province.setText("");
+                binding.fecha.setText("");
+                binding.startDate.setText("");
+                binding.favButton.setVisibility(View.GONE);
+                binding.cardImage.setImageURI(Uri.parse(testCamera.getUrlImage()));
+                binding.infoCard.setBackgroundColor(Color.parseColor("#00000000"));
+                Glide.with(this).load(selectedCamera.getUrlImage()).into(binding.cardImage);
+                binding.incidenceType.setTextColor(getResources().getColor(R.color.camaras));
+                binding.typeBorder.setStrokeColor(getResources().getColor(R.color.camaras));
+                binding.typeBackground.setBackgroundColor(getResources().getColor(R.color.camaras_bg));
+                AnimUtils.slideUp(binding.bottomMenu);
+            }
 
-
-
-            return false; // false allows default behavior (camera moves to marker)
+            return false;
         });
 
         // TESTING
@@ -859,14 +912,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         for (Incidence inc : testIncidences) {
             LatLng position = new LatLng(inc.getLatitude(), inc.getLongitude());
+            boolean isFav = dataManager.isFavorite(inc.getIncidenceId());
             Marker marker = mMap.addMarker(
                     new MarkerOptions()
                             .position(position)
-                            .icon(getMarkerIconForType(inc.getIncidenceType()))
+                            .icon(getMarkerIconForType(inc.getIncidenceType(), isFav))
             );
 
             markerIncidenceMap.put(marker, inc);
         }
+
+
+        LatLng camTestPos = new LatLng(testCamera.getLatitude(), testCamera.getLongitude());
+        Marker camTestMarker = mMap.addMarker(
+                new MarkerOptions().position(camTestPos).icon(getMarkerIconForType("Cámaras", false))
+        );
+
+        markerCameraMap.put(camTestMarker, testCamera);
 
 
         refreshMarkers();
@@ -895,19 +957,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    private BitmapDescriptor getMarkerIconForType(String type) {
+    private BitmapDescriptor getMarkerIconForType(String type, boolean isFav) {
         int drawableId;
-        switch (type) {
-            case "Accidente": drawableId = R.drawable.accidente_marker; break;
-            case "Obras": drawableId = R.drawable.obras_marker; break;
-            case "Meteorología": drawableId = R.drawable.metereologia_marker; break;
-            case "Seguridad vial": drawableId = R.drawable.seguridad_vial_marker; break;
-            case "Retención": drawableId = R.drawable.retencion_marker; break;
-            case "Vialidad invernal": drawableId = R.drawable.vialidad_invernal_marker; break;
-            case "Puertos de montaña": drawableId = R.drawable.puertos_de_montana_marker; break;
-            case "Otros": drawableId = R.drawable.otros_marker; break;
-            default: drawableId = R.drawable.fav_on; break;
+
+        if (isFav) {
+            switch (type) {
+                case "Accidente": drawableId = R.drawable.accidente_marker_fav; break;
+                case "Obras": drawableId = R.drawable.obras_marker_fav; break;
+                case "Meteorología": drawableId = R.drawable.meteorologia_marker_fav; break;
+                case "Seguridad vial": drawableId = R.drawable.seguridad_vial_marker_fav; break;
+                case "Retención": drawableId = R.drawable.retencion_marker_fav; break;
+                case "Vialidad invernal": drawableId = R.drawable.vialidad_invernal_marker_fav; break;
+                case "Puertos de montaña": drawableId = R.drawable.puertos_de_montana_marker_fav; break;
+                case "Otros": drawableId = R.drawable.otros_marker_fav; break;
+                case "Cámaras": drawableId = R.drawable.camara_marker; break;
+                default: drawableId = R.drawable.default_marker; break;
+            }
         }
+        else {
+            switch (type) {
+                case "Accidente": drawableId = R.drawable.accidente_marker; break;
+                case "Obras": drawableId = R.drawable.obras_marker; break;
+                case "Meteorología": drawableId = R.drawable.meteorologia_marker; break;
+                case "Seguridad vial": drawableId = R.drawable.seguridad_vial_marker; break;
+                case "Retención": drawableId = R.drawable.retencion_marker; break;
+                case "Vialidad invernal": drawableId = R.drawable.vialidad_invernal_marker; break;
+                case "Puertos de montaña": drawableId = R.drawable.puertos_de_montana_marker; break;
+                case "Otros": drawableId = R.drawable.otros_marker; break;
+                case "Cámaras": drawableId = R.drawable.camara_marker; break;
+                default: drawableId = R.drawable.default_marker; break;
+            }
+        }
+
 
         return bitmapFromVector(drawableId);
     }
@@ -925,7 +1006,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (Incidence incidence : incidencias) {
                         LatLng position = new LatLng(incidence.getLatitude(), incidence.getLongitude());
 
-                        Marker marker = mMap.addMarker(new MarkerOptions().position(position).icon(getMarkerIconForType(incidence.getIncidenceType())));
+                        boolean isFav = dataManager.isFavorite(incidence.getIncidenceId());
+
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(position).icon(getMarkerIconForType(incidence.getIncidenceType(), isFav)));
                         markerIncidenceMap.put(marker, incidence);
                     }
 
@@ -942,4 +1025,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    private void fetchCameraPage(final int page) {
+        ApiClient.getApiService().getCameras(page).enqueue(new Callback<CameraResponse>() {
+            @Override
+            public void onResponse(Call<CameraResponse> call, Response<CameraResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    CameraResponse cameraResponse = response.body();
+                    List<Camera> cameras = cameraResponse.getItems();
+
+                    for (Camera camera : cameras) {
+                        LatLng position = new LatLng(camera.getLatitude(), camera.getLongitude());
+
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(position).icon(getMarkerIconForType("Cámaras", false)));
+                        markerCameraMap.put(marker, camera);
+                    }
+
+
+                    if (cameraResponse.getCurrentPage() < cameraResponse.getTotalPages()) {
+                        fetchCameraPage(page + 1);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CameraResponse> call, Throwable t) {
+                Log.e("API_ERROR", "Request failed on page " + page, t);
+            }
+        });
+    }
+
+
 }

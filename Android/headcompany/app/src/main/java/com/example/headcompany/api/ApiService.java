@@ -16,7 +16,7 @@ public interface ApiService {
     Call<UsersResponse> getUsers();
 
     @GET("cameras")
-    Call<CameraResponse> getCameras();
+    Call<CameraResponse> getCameras(@Query("page") int page);
 
     @GET("incidences")
     Call<IncidenceResponse> getIncidences(@Query("page") int page);

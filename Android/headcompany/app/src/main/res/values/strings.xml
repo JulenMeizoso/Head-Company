@@ -23,11 +23,13 @@
     <string name="puertos_de_montana">Montaña</string>
     <string name="otros">Otros</string>
     <string name="camaras">Cámaras</string>
+    <string name="camara">Cámara</string>
     <string name="cleanup">🧹 Limpiar todo</string>
 
     <string name="direccion">Dirección</string>
     <string name="ciudad">Ciudad</string>
     <string name="fecha">Fecha</string>
+    <string name="carretera">Carretera</string>
 
     <string name="favs_add">Añadir a favoritos</string>
     <string name="favs_remove">Quitar de favoritos</string>

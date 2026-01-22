@@ -27,4 +27,7 @@
     <color name="otros">#AD46FF</color>
     <color name="otros_bg">#40AD46FF</color>
 
+    <color name="camaras">#2B7FFF</color>
+    <color name="camaras_bg">#402B7FFF</color>
+
 </resources>

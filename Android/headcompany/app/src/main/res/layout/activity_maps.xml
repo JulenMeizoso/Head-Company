@@ -170,15 +170,16 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="275dp"
-                        android:layout_height="125dp"
+                        android:layout_width="225dp"
+                        android:layout_height="130dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:backgroundTint="#D9D9D9"
                         app:cardCornerRadius="10dp"
-                        app:layout_constraintVertical_bias="0.425"
+                        app:layout_constraintVertical_bias="0.85"
+                        android:background="#00000000"
+                        android:backgroundTint="#00000000"
                         app:cardElevation="0dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -187,9 +188,53 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="#00000000"
+                            android:backgroundTint="#00000000">
+
+                            <ImageView
+                                android:id="@+id/card_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="275dp"
+                        android:layout_height="125dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="#00000000"
+                        android:backgroundTint="#00000000"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintVertical_bias="0.425"
+                        app:cardElevation="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/info_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="#D9D9D9">
+
+
 
                             <TextView
+                                android:id="@+id/direccion"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -216,6 +261,7 @@
                                 app:layout_constraintVertical_bias="0.25"/>
 
                             <TextView
+                                android:id="@+id/ciudad"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -242,6 +288,7 @@
                                 app:layout_constraintVertical_bias="0.6"/>
 
                             <TextView
+                                android:id="@+id/fecha"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -405,7 +452,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/meteorologia"
-                    android:drawableEnd="@drawable/metereologia"
+                    android:drawableEnd="@drawable/meteorologia"
                     app:strokeWidth="3dp"
                     app:layout_constraintVertical_bias="0.325"
                     android:backgroundTint="#D9D9D9"
@@ -525,14 +572,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/camaras"
+                    android:drawableEnd="@drawable/camara"
                     app:strokeWidth="3dp"
-                    app:strokeColor="#828282"
+                    app:strokeColor="@color/camaras"
                     app:layout_constraintVertical_bias="0.775"
                     android:backgroundTint="#D9D9D9"
                     app:cornerRadius="7.5dp"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter"
-                    android:textColor="#828282"
+                    android:textColor="@color/camaras"
                     app:rippleColor="@android:color/transparent"/>
 
                 <com.google.android.material.button.MaterialButton

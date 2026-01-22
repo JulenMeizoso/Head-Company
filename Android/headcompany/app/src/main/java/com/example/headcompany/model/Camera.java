@@ -79,4 +79,8 @@ public class Camera {
     public String getRoad() {
         return road;
     }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
 }
