@@ -401,22 +401,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         });
 
-
-        binding.profile.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    AnimUtils.jiggleDown(v);
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    Intent gotoProfileActivity = new Intent(MapsActivity.this, ProfileActivity.class);
-                    startActivity(gotoProfileActivity);
-                    AnimUtils.jiggleUp(v);
-                    break;
-            }
-            return false;
-        });
-
         binding.menu.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:

@@ -99,6 +99,21 @@
                 app:layout_constraintVertical_bias="0.35"
                 app:layout_constraintHorizontal_bias="0.125"/>
 
+            <TextView
+                android:id="@+id/mailerr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="90dp"
+                android:textAlignment="viewStart"
+                android:text=""
+                android:textSize="12sp"
+                android:fontFamily="@font/inter"
+                android:textColor="#F26D6D"
+                app:layout_constraintVertical_bias="0.3515" />
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,9 +144,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintHorizontal_bias="0.035"
+                        app:tint="#80828282"
                         android:src="@drawable/user"/>
 
                     <EditText
+                        android:id="@+id/mail"
                         android:layout_width="325dp"
                         android:layout_height="45dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -162,6 +179,21 @@
                 android:textColor="#364153"
                 app:layout_constraintVertical_bias="0.475"
                 app:layout_constraintHorizontal_bias="0.125"/>
+
+            <TextView
+                android:id="@+id/passerr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="115dp"
+                android:textAlignment="viewStart"
+                android:text=""
+                android:textSize="12sp"
+                android:fontFamily="@font/inter"
+                android:textColor="#F26D6D"
+                app:layout_constraintVertical_bias="0.475"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
@@ -196,6 +228,7 @@
                         android:src="@drawable/lock"/>
 
                     <EditText
+                        android:id="@+id/password"
                         android:layout_width="325dp"
                         android:layout_height="45dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -225,6 +258,22 @@
                 android:text="@string/repeatPassword"
                 android:fontFamily="@font/inter"
                 android:textColor="#364153"
+                app:layout_constraintVertical_bias="0.6"
+                app:layout_constraintHorizontal_bias="0.15"/>
+
+            <TextView
+                android:id="@+id/repeat_passerr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="162.5dp"
+                android:textAlignment="viewStart"
+                android:text=""
+                android:textSize="12sp"
+                android:fontFamily="@font/inter"
+                android:textColor="#F26D6D"
                 app:layout_constraintVertical_bias="0.6"
                 app:layout_constraintHorizontal_bias="0.15"/>
 
@@ -261,6 +310,7 @@
                         android:src="@drawable/lock"/>
 
                     <EditText
+                        android:id="@+id/repeat_password"
                         android:layout_width="325dp"
                         android:layout_height="45dp"
                         app:layout_constraintBottom_toBottomOf="parent"

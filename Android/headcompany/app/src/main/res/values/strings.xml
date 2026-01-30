@@ -34,4 +34,13 @@
     <string name="favs_add">Añadir a favoritos</string>
     <string name="favs_remove">Quitar de favoritos</string>
 
+    <string name="logout">Cerrar sesión</string>
+
+    <string name="input_empty">No puede estar vacío</string>
+    <string name="mail_no_at">No contiene arroba (@)</string>
+    <string name="mail_more_than_one_at">No puede tener más de un arroba (@)</string>
+    <string name="invalid_format">Formato incorrecto</string>
+    <string name="mail_already_exists">Este correo ya existe</string>
+    <string name="password_repeat_notequal">Las contraseñas no coinciden</string>
+
 </resources>
