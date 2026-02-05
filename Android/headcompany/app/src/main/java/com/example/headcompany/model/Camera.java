@@ -1,6 +1,8 @@
 package com.example.headcompany.model;
 
 public class Camera {
+
+    // ATTRIBUTES
     private String address;
     private int cameraId;
     private String cameraName;
@@ -11,7 +13,10 @@ public class Camera {
     private int sourceId;
     private String urlImage;
 
-    // Constructor
+    // CONSTRUCTOR
+
+    public Camera() {}
+
     public Camera(String address, int cameraId, String cameraName, String kilometer, double latitude,
                   double longitude, String road, int sourceId, String urlImage) {
         super();
@@ -27,7 +32,7 @@ public class Camera {
     }
 
 
-    //Getters & Setters
+    //GETTERS & SETTERS
     public String getAddress() {
         return address;
     }

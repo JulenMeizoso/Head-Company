@@ -4,16 +4,10 @@ import org.tensorflow.lite.schema.Model;
 
 import java.util.List;
 
-public class IncidenceResponse {
-
-    private int totalItems;
-    private int totalPages;
-    private int currentPage;
+public class IncidenceResponse extends Response {
+    // ATTRIBUTES
     private List<Incidence> items;
 
-    // Getters
-    public int getTotalItems() { return totalItems; }
-    public int getTotalPages() { return totalPages; }
-    public int getCurrentPage() { return currentPage; }
+    // GETTERS
     public List<Incidence> getItems() { return items; }
 }

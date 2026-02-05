@@ -1,0 +1,148 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\julen\\source\\repos\\RETO2HC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|c:\\users\\julen\\source\\repos\\reto2hc\\reto2hc\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\imagewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\imagewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\imagewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\imagewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\incidenceformwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\incidenceformwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\incidenceformwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\incidenceformwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|C:\\Users\\julen\\source\\repos\\RETO2HC\\reto2hc\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4AA171D-43D1-411A-8413-954B6DD0D69C}|RETO2HC\\RETO2HC.csproj|solutionrelative:reto2hc\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ImageWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\ImageWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RETO2HC\\ImageWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\ImageWindow.xaml.cs",
+              "RelativeToolTip": "RETO2HC\\ImageWindow.xaml.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAgwBQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-22T11:04:36.453Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "RETO2HC\\DatabaseService.cs",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\DatabaseService.cs",
+              "RelativeToolTip": "RETO2HC\\DatabaseService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T10:50:23.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "RETO2HC\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\MainViewModel.cs",
+              "RelativeToolTip": "RETO2HC\\MainViewModel.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAgwGkAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-23T10:51:28.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "RETO2HC\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\MainWindow.xaml",
+              "RelativeToolTip": "RETO2HC\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-22T11:30:11.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IncidenceFormWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\IncidenceFormWindow.xaml",
+              "RelativeDocumentMoniker": "RETO2HC\\IncidenceFormWindow.xaml",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\IncidenceFormWindow.xaml",
+              "RelativeToolTip": "RETO2HC\\IncidenceFormWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-22T11:25:53.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RETO2HC\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\MainWindow.xaml.cs",
+              "RelativeToolTip": "RETO2HC\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T09:17:47.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IncidenceFormWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\IncidenceFormWindow.xaml.cs",
+              "RelativeDocumentMoniker": "RETO2HC\\IncidenceFormWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\IncidenceFormWindow.xaml.cs",
+              "RelativeToolTip": "RETO2HC\\IncidenceFormWindow.xaml.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAowHAAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-22T10:46:44.924Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ImageWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\ImageWindow.xaml",
+              "RelativeDocumentMoniker": "RETO2HC\\ImageWindow.xaml",
+              "ToolTip": "C:\\Users\\julen\\source\\repos\\RETO2HC\\RETO2HC\\ImageWindow.xaml",
+              "RelativeToolTip": "RETO2HC\\ImageWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-22T11:04:27.366Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

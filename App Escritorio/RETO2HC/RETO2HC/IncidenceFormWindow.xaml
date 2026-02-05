@@ -1,0 +1,86 @@
+﻿<Window x:Class="RETO2HC.IncidenceFormWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="Gestión de Incidencia" Height="500" Width="400"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="#121212" Foreground="White">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#222"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#333"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#2ECC71"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+    </Window.Resources>
+
+    <Border BorderBrush="#2ECC71" BorderThickness="1" Padding="20">
+        <StackPanel>
+            <TextBlock Text="DATOS DE INCIDENCIA" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="White"/>
+
+            <TextBlock Text="Tipo de Incidencia:"/>
+            <ComboBox x:Name="CmbType" SelectedItem="{Binding Type}" Margin="0,0,0,15" Height="30" Background="#222" Foreground="Black">
+                <ComboBox.ItemsSource>
+                    <x:Array Type="{x:Type system:String}">
+                        <system:String>Accidente</system:String>
+                        <system:String>Obras</system:String>
+                        <system:String>Meteorología</system:String>
+                        <system:String>Retención</system:String>
+                        <system:String>Otro</system:String>
+                    </x:Array>
+                </ComboBox.ItemsSource>
+            </ComboBox>
+
+            <TextBlock Text="Ubicación / Carretera:"/>
+            <TextBox x:Name="TxtRoad" Text="{Binding Road}"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock Text="Latitud:"/>
+                    <TextBox x:Name="TxtLatitude" Text="{Binding Latitude}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Longitud:"/>
+                    <TextBox x:Name="TxtLongitude" Text="{Binding Longitude}"/>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Text="Fecha y Hora de Inicio:"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <DatePicker x:Name="DtPicker" 
+                            Grid.Column="0" 
+                            VerticalContentAlignment="Center" 
+                            Height="30"/>
+
+                <TextBox x:Name="TxtTime" 
+                         Grid.Column="1" 
+                         Margin="10,0,0,0" 
+                         Height="30"
+                         VerticalContentAlignment="Center"
+                         ToolTip="Formato HH:mm (Ej: 14:30)"
+                         Text="00:00"/>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button Content="Cancelar" IsCancel="True" Width="100" Height="35" Background="Transparent" Foreground="#E74C3C" BorderBrush="#E74C3C" BorderThickness="1" Margin="0,0,10,0" Click="Cancel_Click"/>
+                <Button Content="GUARDAR" IsDefault="True" Width="100" Height="35" Background="#2ECC71" Foreground="#121212" FontWeight="Bold" BorderThickness="0" Click="Save_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

@@ -3,9 +3,7 @@ package com.example.headcompany;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -21,10 +19,10 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import com.example.headcompany.api.ApiClient;
 import com.example.headcompany.model.UsersResponse;
 import com.example.headcompany.model.Usuario;
+import com.example.headcompany.utils.AnimUtils;
 import com.example.headcompany.utils.PasswordAuthentication;
 import com.google.android.material.button.MaterialButton;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import retrofit2.Call;
@@ -39,9 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password = null;
     private TextView mailerr = null;
     private TextView passerr = null;
-    private final PasswordAuthentication pa = new PasswordAuthentication();
-
-
 
 
     public interface EmailCheckCallback {

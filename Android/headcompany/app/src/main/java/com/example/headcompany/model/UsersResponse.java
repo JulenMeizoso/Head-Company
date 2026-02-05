@@ -2,16 +2,10 @@ package com.example.headcompany.model;
 
 import java.util.List;
 
-public class UsersResponse {
-
-    private int totalItems;
-    private int totalPages;
-    private int currentPage;
+public class UsersResponse extends Response {
+    // ATTRIBUTES
     private List<Usuario> items;
 
-    // Getters
-    public int getTotalItems() { return totalItems; }
-    public int getTotalPages() { return totalPages; }
-    public int getCurrentPage() { return currentPage; }
+    // GETTER
     public List<Usuario> getItems() { return items; }
 }

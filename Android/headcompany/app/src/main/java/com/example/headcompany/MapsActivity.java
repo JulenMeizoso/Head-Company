@@ -1,7 +1,6 @@
 package com.example.headcompany;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowInsetsController;
 
 
 import androidx.core.content.ContextCompat;
@@ -28,6 +26,7 @@ import com.example.headcompany.model.Camera;
 import com.example.headcompany.model.CameraResponse;
 import com.example.headcompany.model.Incidence;
 import com.example.headcompany.model.IncidenceResponse;
+import com.example.headcompany.utils.AnimUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -37,7 +36,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.button.MaterialButton;
 import com.bumptech.glide.Glide;
 
 

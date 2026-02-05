@@ -2,16 +2,17 @@ package com.example.headcompany.model;
 
 public class Usuario {
 
+    // ATTRIBUTES
     private String mail;
     private String contra;
 
-    // Constructor
+    // CONSTRUCTOR
     public Usuario(String mail, String contra) {
         this.mail = mail;
         this.contra = contra;
     }
 
-    // Getters & Setters
+    // GETTERS & SETTERS
     public String getMail() {
         return mail;
     }

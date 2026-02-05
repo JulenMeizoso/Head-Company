@@ -1,6 +1,8 @@
 package com.example.headcompany.model;
 
 public class Incidence {
+
+    // ATTRIBUTES
     private String autonomousRegion;
     private String carRegistration;
     private String cause;
@@ -21,7 +23,7 @@ public class Incidence {
     private int sourceId;
     private String startDate;
 
-    // Constructor
+    // CONSTRUCTOR
     public Incidence(String autonomousRegion, String carRegistration, String cause, String cityTown, String direction,
                      String endDate, String incidenceDescription, int incidenceId, String incidenceLevel,
                      String incidenceName, String incidenceType, double latitude, double longitude, double pkEnd, double pkStart,
@@ -48,7 +50,7 @@ public class Incidence {
     }
 
 
-    //Getters & Setters
+    //GETTERS & SETTERS
     public String getAutonomousRegion() {
         return autonomousRegion;
     }

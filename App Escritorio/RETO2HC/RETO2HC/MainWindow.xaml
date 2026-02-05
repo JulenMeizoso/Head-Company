@@ -1,0 +1,470 @@
+﻿<Window x:Class="RETO2HC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RETO2HC"
+        mc:Ignorable="d"
+        Title="Head Company - Security Suite" Height="800" Width="1400"
+        WindowStartupLocation="CenterScreen" Background="#121212"
+        Foreground="White">
+
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <local:BoolToVisConverter x:Key="BoolToVis"/>
+
+        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="#2ECC71"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="35,0,10,0"/>
+        </Style>
+
+        <Style x:Key="NavRadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#AAAAAA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="55"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="30,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="GroupName" Value="NavGroup"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="#2ECC71" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0,6,6,0" Margin="0,0,10,0">
+                            <Grid>
+                                <ContentPresenter VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                <Rectangle x:Name="indicator" HorizontalAlignment="Left" Width="0" Fill="#2ECC71" Opacity="0.8"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1A2720"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1A2720"/>
+                                <Setter Property="Foreground" Value="#2ECC71"/>
+                                <Setter Property="BorderThickness" Value="4,0,0,0"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BtnPdfStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2ECC71"/>
+            <Setter Property="Foreground" Value="#121212"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#27AE60"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#1E8449"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="BtnLogoutStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#E74C3C"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="6" BorderBrush="#E74C3C" BorderThickness="1" Padding="0,8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#E74C3C"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BtnVerStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#2ECC71"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="Ver" TextDecorations="Underline" Foreground="{TemplateBinding Foreground}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BtnDeleteStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#E74C3C"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Visibility" Value="{Binding IsSource67, Converter={StaticResource BoolToVis}}"/>
+        </Style>
+
+        <Style x:Key="DistinctRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSource67}" Value="True">
+                    <Setter Property="Background" Value="#0D2618"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="BorderBrush" Value="#333"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="RowStyle" Value="{StaticResource DistinctRowStyle}"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#333"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="False"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#121212"/>
+            <Setter Property="Foreground" Value="#2ECC71"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="BorderBrush" Value="#2ECC71"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#151515" BorderBrush="#333" BorderThickness="0,0,1,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="0,40,0,50">
+                    <TextBlock Text="HEAD" FontSize="36" FontWeight="Black" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Text="COMPANY" FontSize="20" FontWeight="Light" Foreground="#2ECC71" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <RadioButton Content="Usuarios" IsChecked="True" Command="{Binding NavigateUsersCommand}" Style="{StaticResource NavRadioButtonStyle}"/>
+                    <RadioButton Content="Cámaras" Command="{Binding NavigateCamerasCommand}" Style="{StaticResource NavRadioButtonStyle}"/>
+                    <RadioButton Content="Incidencias" Command="{Binding NavigateIncidenceCommand}" Style="{StaticResource NavRadioButtonStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Margin="30,0,30,40">
+                    <Button Content="🔄 REFRESCAR API" 
+                            Command="{Binding RefreshServerCommand}" 
+                            Style="{StaticResource BtnPdfStyle}" 
+                            Background="#E67E22" 
+                            Margin="0,0,0,10">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button Content="📥 EXPORTAR DATOS" 
+                            Command="{Binding ExportPdfCommand}" 
+                            Style="{StaticResource BtnPdfStyle}"/>
+
+                    <Separator Background="#333" Margin="0,20"/>
+                    <Button Content="Cerrar Sesión" 
+                            Command="{Binding LogoutCommand}" 
+                            Style="{StaticResource BtnLogoutStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}" Margin="50,40,50,40">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type local:UsersViewModel}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Usuarios" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,25"/>
+                        <DataGrid Grid.Row="1" ItemsSource="{Binding Users}" CanUserAddRows="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Correo Electrónico" Binding="{Binding Email}" Width="2*"/>
+                                <DataGridTextColumn Header="Contraseña" Binding="{Binding Password}" Width="1*" Foreground="#777"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type local:CamerasViewModel}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,20">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="Cámaras" FontSize="28" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                <Border Background="#222" CornerRadius="15" BorderBrush="#333" BorderThickness="1" Width="300" Height="35">
+                                    <Grid>
+                                        <TextBlock Text="🔍" Foreground="#555" VerticalAlignment="Center" Margin="12,0,0,0" FontSize="14"/>
+                                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource SearchBoxStyle}"
+                                                 ToolTip="Buscar por Nombre de cámara..."/>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+
+                            <Button Content="+ AÑADIR CÁMARA" Command="{Binding AddCameraCommand}" 
+                                    HorizontalAlignment="Right"
+                                    Background="#2ECC71" Foreground="#121212" FontWeight="Bold" 
+                                    Padding="15,8" BorderThickness="0" Cursor="Hand">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="4"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+
+                        <DataGrid Grid.Row="1" ItemsSource="{Binding Cameras}" RowHeight="45"
+                                  CanUserAddRows="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="2*"/>
+                                <DataGridTextColumn Header="Dirección" Binding="{Binding Address}" Width="2*"/>
+                                <DataGridTextColumn Header="Road" Binding="{Binding Road}" Width="80"/>
+                                <DataGridTextColumn Header="Km" Binding="{Binding Kilometer}" Width="60"/>
+                                <DataGridTextColumn Header="Lat" Binding="{Binding Latitude}" Width="80"/>
+                                <DataGridTextColumn Header="Lon" Binding="{Binding Longitude}" Width="80"/>
+
+                                <DataGridTemplateColumn Header="Acciones" Width="180">
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Button Content="Ver" 
+                                                        Command="{Binding DataContext.ViewImageCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource BtnVerStyle}" 
+                                                        Margin="0,0,10,0"/>
+
+                                                <Button Content="✏️" 
+                                                        Command="{Binding DataContext.EditCameraCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                        CommandParameter="{Binding}"
+                                                        Background="Transparent" BorderThickness="0" Foreground="#2ECC71" FontSize="16" Cursor="Hand" Margin="0,0,10,0"
+                                                        ToolTip="Editar Cámara">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsSource67}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+
+                                                <Button Content="❌" Command="{Binding DataContext.DeleteCameraCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                        CommandParameter="{Binding}" Style="{StaticResource BtnDeleteStyle}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                            <Button Content="◄" Command="{Binding PreviousPageCommand}" Width="40" Height="30" Background="#333" Foreground="White" BorderThickness="0"/>
+                            <TextBlock Text="{Binding PageInfo}" Margin="20,0" VerticalAlignment="Center" Foreground="#AAA"/>
+                            <Button Content="►" Command="{Binding NextPageCommand}" Width="40" Height="30" Background="#333" Foreground="White" BorderThickness="0"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type local:IncidenceViewModel}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="1" Margin="0,0,0,20">
+                            <TextBlock Text="Filtrar por categoría:" Foreground="#AAA" FontSize="12" Margin="5,0,0,10"/>
+
+                            <ListBox ItemsSource="{Binding FilterOptions}" 
+                                 SelectedItem="{Binding CurrentFilter}" 
+                                 Background="Transparent" 
+                                 BorderThickness="0">
+                                
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListBoxItem">
+                                                    <Border x:Name="bd" 
+                                    Background="#222" 
+                                    CornerRadius="4" 
+                                    Padding="12,8" 
+                                    Margin="0,0,10,10" 
+                                    Cursor="Hand"
+                                    BorderBrush="#333"
+                                    BorderThickness="1">
+                                                        <TextBlock Text="{Binding}" x:Name="txt" Foreground="White" FontSize="13"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="bd" Property="Background" Value="#333"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="bd" Property="Background" Value="#2ECC71"/>
+                                                            <Setter TargetName="bd" Property="BorderBrush" Value="#2ECC71"/>
+                                                            <Setter TargetName="txt" Property="Foreground" Value="#121212"/>
+                                                            <Setter TargetName="txt" Property="FontWeight" Value="Bold"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </StackPanel>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="Incidencias" FontSize="28" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                <Border Background="#222" CornerRadius="15" BorderBrush="#333" BorderThickness="1" Width="300" Height="35">
+                                    <Grid>
+                                        <TextBlock Text="🔍" Foreground="#555" VerticalAlignment="Center" Margin="12,0,0,0" FontSize="14"/>
+                                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource SearchBoxStyle}"
+                                                 ToolTip="Buscar por Ubicación/Carretera..."/>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+
+                            <Button Content="+ AÑADIR INCIDENCIA" Command="{Binding AddIncidenceCommand}" 
+                                    HorizontalAlignment="Right"
+                                    Background="#2ECC71" Foreground="#121212" FontWeight="Bold" 
+                                    Padding="15,8" BorderThickness="0" Cursor="Hand">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="4"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+
+                        <DataGrid Grid.Row="2" ItemsSource="{Binding Incidences}" RowHeight="45"
+                                  CanUserAddRows="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Tipo" Binding="{Binding Type}" FontWeight="Bold" Foreground="#2ECC71" Width="1.5*"/>
+                                <DataGridTextColumn Header="Ubicación / Ctra" Binding="{Binding Road}" Width="1*"/>
+                                <DataGridTextColumn Header="Lat" Binding="{Binding Latitude}" Width="80"/>
+                                <DataGridTextColumn Header="Lon" Binding="{Binding Longitude}" Width="80"/>
+                                <DataGridTextColumn Header="Fecha Inicio" Binding="{Binding DisplayDate}" Width="150" Foreground="#AAA"/>
+
+                                <DataGridTemplateColumn Header="Acciones" Width="120">
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Button Content="✏️" 
+                                                        Command="{Binding DataContext.EditIncidenceCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                        CommandParameter="{Binding}"
+                                                        Background="Transparent" BorderThickness="0" Foreground="#2ECC71" FontSize="16" Cursor="Hand" Margin="0,0,15,0">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsSource67}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+
+                                                <Button Content="❌" Command="{Binding DataContext.DeleteIncidenceCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                        CommandParameter="{Binding}" Style="{StaticResource BtnDeleteStyle}" Margin="0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                            <Button Content="◄" Command="{Binding PreviousPageCommand}" Width="40" Height="30" Background="#333" Foreground="White" BorderThickness="0"/>
+                            <TextBlock Text="{Binding PageInfo}" Margin="20,0" VerticalAlignment="Center" Foreground="#AAA"/>
+                            <Button Content="►" Command="{Binding NextPageCommand}" Width="40" Height="30" Background="#333" Foreground="White" BorderThickness="0"/>
+                        </StackPanel>   
+                    </Grid>
+                </DataTemplate>     
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>

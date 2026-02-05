@@ -1,7 +1,6 @@
 package com.example.headcompany;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.EditText;
@@ -19,11 +18,9 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import com.example.headcompany.api.ApiClient;
 import com.example.headcompany.model.UsersResponse;
 import com.example.headcompany.model.Usuario;
+import com.example.headcompany.utils.AnimUtils;
 import com.example.headcompany.utils.PasswordAuthentication;
 import com.google.android.material.button.MaterialButton;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
