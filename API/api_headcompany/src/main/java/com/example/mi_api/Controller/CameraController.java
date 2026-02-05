@@ -36,14 +36,6 @@ public class CameraController {
 		
 		camera.setSourceId(67);
 
-		// Comprobación
-		boolean exists = cameraList.stream()
-				.anyMatch(c -> c.getCameraId() == camera.getCameraId() && c.getSourceId() == 67);
-
-		if (exists) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-		}
-
 		// Ejecución
 		try {
 			CameraRepo.addCamera(camera);

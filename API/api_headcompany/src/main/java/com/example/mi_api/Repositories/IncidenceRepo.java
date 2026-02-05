@@ -16,9 +16,9 @@ public class IncidenceRepo {
 
         String sql = "INSERT INTO incidences "
                 + "(autonomous_region, car_registration, cause, city_town, direction, "
-                + "end_date, incidence_description, incidence_id, incidence_level, incidence_name, incidence_type, "
+                + "end_date, incidence_description, incidence_level, incidence_name, incidence_type, "
                 + "latitude, longitude, pk_end, pk_start, province, road, source_id, start_date) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = Connector.getConexion();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -30,18 +30,17 @@ public class IncidenceRepo {
             pstmt.setString(5, incidence.getDirection());
             pstmt.setString(6, incidence.getEndDate());
             pstmt.setString(7, incidence.getIncidenceDescription());
-            pstmt.setInt(8, incidence.getIncidenceId());
-            pstmt.setString(9, incidence.getIncidenceLevel());
-            pstmt.setString(10, incidence.getIncidenceName());
-            pstmt.setString(11, incidence.getIncidenceType());
-            pstmt.setDouble(12, incidence.getLatitude());
-            pstmt.setDouble(13, incidence.getLongitude());
-            pstmt.setDouble(14, incidence.getPkEnd());
-            pstmt.setDouble(15, incidence.getPkStart());
-            pstmt.setString(16, incidence.getProvince());
-            pstmt.setString(17, incidence.getRoad());
-            pstmt.setInt(18, incidence.getSourceId());
-            pstmt.setString(19, incidence.getStartDate());
+            pstmt.setString(8, incidence.getIncidenceLevel());
+            pstmt.setString(9, incidence.getIncidenceName());
+            pstmt.setString(10, incidence.getIncidenceType());
+            pstmt.setDouble(11, incidence.getLatitude());
+            pstmt.setDouble(12, incidence.getLongitude());
+            pstmt.setDouble(13, incidence.getPkEnd());
+            pstmt.setDouble(14, incidence.getPkStart());
+            pstmt.setString(15, incidence.getProvince());
+            pstmt.setString(16, incidence.getRoad());
+            pstmt.setInt(17, incidence.getSourceId());
+            pstmt.setString(18, incidence.getStartDate());
 
             pstmt.executeUpdate();
 

@@ -37,7 +37,11 @@ public class InicializarBD {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void InsertarUsuarios() throws Exception {
+		
+		PasswordAuthentication auth = new PasswordAuthentication();
+		
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>(Arrays.asList(
 			    new Usuario("admin@trafficapp.com", "admin123"),
 			    new Usuario("juan.perez@gmail.com", "123456"),
@@ -64,6 +68,7 @@ public class InicializarBD {
 		try {
 			
 			for(Usuario usuario : listaUsuarios) {
+				usuario.setContra(auth.hash(usuario.getContra()));
 				UsuarioRepo.addUsuario(usuario);
 			}
 			

@@ -15,18 +15,17 @@ public class CameraRepo {
 	public static void addCamera(Camera camera) throws SQLException {
 
 		try (Connection connection = Connector.getConexion()) {
-			String sql = "INSERT INTO cameras (address, camera_id, camera_name, kilometer, latitude, longitude, road, source_id, url_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO cameras (address, camera_name, kilometer, latitude, longitude, road, source_id, url_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 			try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 				pstmt.setString(1, camera.getAddress());
-				pstmt.setInt(2, camera.getCameraId());
-				pstmt.setString(3, camera.getCameraName());
-				pstmt.setString(4, camera.getKilometer());
-				pstmt.setDouble(5, camera.getLatitude());
-				pstmt.setDouble(6, camera.getLongitude());
-				pstmt.setString(7, camera.getRoad());
-				pstmt.setInt(8, camera.getSourceId());
-				pstmt.setString(9, camera.getUrlImage());
+				pstmt.setString(2, camera.getCameraName());
+				pstmt.setString(3, camera.getKilometer());
+				pstmt.setDouble(4, camera.getLatitude());
+				pstmt.setDouble(5, camera.getLongitude());
+				pstmt.setString(6, camera.getRoad());
+				pstmt.setInt(7, camera.getSourceId());
+				pstmt.setString(8, camera.getUrlImage());
 
 				pstmt.executeUpdate();
 			}

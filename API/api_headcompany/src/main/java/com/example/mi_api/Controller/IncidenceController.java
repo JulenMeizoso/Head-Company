@@ -35,13 +35,6 @@ public class IncidenceController {
 	public ResponseEntity<Incidence> addIncidence(@RequestBody Incidence incidence) {
 		incidence.setSourceId(67);
 
-		// Comprobación
-		boolean exists = incidenceList.stream().anyMatch(i -> i.getIncidenceId() == incidence.getIncidenceId());
-
-		if (exists) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-		}
-
 		// Ejecución
 		try {
 			IncidenceRepo.addIncidence(incidence);
